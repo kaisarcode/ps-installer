@@ -1,7 +1,7 @@
 version: '3'
 
 services:
- 
+
   mysql:
     image: mysql:5.7
     container_name: ${DBCONTAINER}
@@ -23,6 +23,18 @@ services:
       - ${PSPORT}:80
     links:
       - mysql:${DBCONTAINER}
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: ${PMCONTAINER}
+    links:
+      - ${DBCONTAINER}
+    environment:
+      PMA_HOST: ${DBCONTAINER}
+      PMA_PORT: ${DBPORT}
+    restart: always
+    ports:
+      - ${PMPORT}:80
 
 volumes:
   mysql:
