@@ -3,9 +3,11 @@
 
 # Clean up old installation
 sudo echo 'Cleaning up...'
+mkdir -p www
 sudo docker-compose down
 sudo chmod -R 777 www
 sudo rm -rf www
+mkdir -p www
 
 # Install base files
 wget "https://download.prestashop.com/download/releases/prestashop_${PSVERSION}.zip"
@@ -23,7 +25,7 @@ sudo docker-compose up -d
 
 # Install PrestaShop
 echo 'Setting up PrestaShop, please wait...'
-sudo docker exec -ti ps_www sh -c \
+sudo docker exec -ti $PSCONTAINER sh -c \
 "php install/index_cli.php \
 --db_server=${DBCONTAINER} \
 --db_name=${DBNAME} \
@@ -36,7 +38,7 @@ sudo docker exec -ti ps_www sh -c \
 --password=${PSPASS} \
 --name=${PSNAME} \
 --send_email=0 \
---newsletter=0" #> /dev/null 2>&1;
+--newsletter=0"; #> /dev/null 2>&1;
 
 # Set up admin dir
 sudo mv www/admin www/$PSADMINDIR
@@ -52,4 +54,4 @@ sudo chmod -R 777 www
 #find www -type f -exec sudo chmod 0644 {} \; 
 
 # Done!
-echo 'Setup complete! Have fun!'
+echo "Setup complete! Have fun!";

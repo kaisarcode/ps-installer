@@ -12,7 +12,7 @@ services:
       - mysql:/var/lib/mysql
     ports:
         - ${DBPORT}:3306
-
+  
   www:
     build: .
     container_name: ${PSCONTAINER}
@@ -28,7 +28,7 @@ services:
     image: phpmyadmin/phpmyadmin
     container_name: ${PMCONTAINER}
     links:
-      - ${DBCONTAINER}
+      - mysql
     environment:
       PMA_HOST: ${DBCONTAINER}
       PMA_PORT: ${DBPORT}
