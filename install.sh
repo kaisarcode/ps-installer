@@ -23,6 +23,10 @@ sudo chmod -R 777 www
 sudo docker-compose build
 sudo docker-compose up -d
 
+if [ $PSPORT != 80 ]; then
+    PSDOMAIN+=":${PSPORT}";
+fi
+
 # Install PrestaShop
 echo 'Setting up PrestaShop, please wait...'
 sudo docker exec -ti $PSCONTAINER sh -c \
@@ -32,7 +36,7 @@ sudo docker exec -ti $PSCONTAINER sh -c \
 --db_password=${DBPASS} \
 --prefix=${DBPREFIX} \
 --engine=${DBENGINE} \
---domain=${PSDOMAIN}:${PSPORT} \
+--domain=${PSDOMAIN} \
 --language=${PSLANG} \
 --email=${PSEMAIL} \
 --password=${PSPASS} \
@@ -54,4 +58,4 @@ sudo chmod -R 777 www
 #find www -type f -exec sudo chmod 0644 {} \; 
 
 # Done!
-echo "Setup complete! Have fun!";
+echo "Setup finished.";
