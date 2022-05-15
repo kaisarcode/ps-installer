@@ -31,11 +31,11 @@ fi
 echo 'Setting up PrestaShop, please wait...'
 sudo docker exec -ti $PSCONTAINER sh -c \
 "php install/index_cli.php \
+--db_create=1 \
 --db_server=${DBCONTAINER} \
 --db_name=${DBNAME} \
 --db_password=${DBPASS} \
 --prefix=${DBPREFIX} \
---engine=${DBENGINE} \
 --domain=${PSDOMAIN} \
 --language=${PSLANG} \
 --email=${PSEMAIL} \
