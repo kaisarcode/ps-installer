@@ -24,17 +24,5 @@ services:
     links:
       - mysql:${DBCONTAINER}
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: ${PMCONTAINER}
-    links:
-      - mysql
-    environment:
-      PMA_HOST: ${DBCONTAINER}
-      PMA_PORT: ${DBPORT}
-    restart: always
-    ports:
-      - ${PMPORT}:80
-
 volumes:
   mysql:
