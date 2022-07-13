@@ -28,6 +28,11 @@ RUN apt install -y php${PHP_VERSION}-simplexml php${PHP_VERSION}-xmlrpc
 RUN a2enmod rewrite
 RUN service apache2 restart
 
+# Install composer
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+RUN php composer-setup.php --install-dir=bin --filename=composer
+RUN php -r "unlink('composer-setup.php');"
+
 # Setup filesystem
 COPY ./www /var/www/html:rw
 COPY ./assets/vhost /etc/apache2/sites-available/000-default.conf
