@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG PHP_VERSION='7.1'
+ARG PHP_VERSION='7.4'
 
 # Install system
 RUN apt update && apt -y upgrade

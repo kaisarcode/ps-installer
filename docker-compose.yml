@@ -12,21 +12,21 @@ services:
       - mysql:/var/lib/mysql
     ports:
         - ${DBPORT}:3306
-  
+
   www:
     build: .
     container_name: ${PSCONTAINER}
-    volumes : 
+    volumes :
       - ./www:/var/www/html:rw
     restart: always
     ports:
       - ${PSPORT}:80
     links:
       - mysql:${DBCONTAINER}
-  
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: ${PMCONTAINER}
+    container_name: ${MACONTAINER}
     links:
       - mysql
     environment:
@@ -34,7 +34,7 @@ services:
       PMA_PORT: ${DBPORT}
     restart: always
     ports:
-      - ${PMPORT}:80
+      - ${MAPORT}:80
 
 volumes:
   mysql:
