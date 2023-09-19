@@ -24,7 +24,7 @@ sudo docker-compose build
 sudo docker-compose up -d
 
 if [ $PSPORT != 80 ]; then
-    PSDOMAIN+=":${PSPORT}";
+    PSDOMAIN="${PSDOMAIN}:${PSPORT}";
 fi
 
 # Install PrestaShop
@@ -55,7 +55,7 @@ cp assets/GeoLite2-City.mmdb www/app/Resources/geoip/GeoLite2-City.mmdb
 # Set permissions
 sudo chmod -R 777 www
 #find www -type d -exec sudo chmod 0755 {} \;
-#find www -type f -exec sudo chmod 0644 {} \; 
+#find www -type f -exec sudo chmod 0644 {} \;
 
 # Done!
 echo "Setup finished.";
